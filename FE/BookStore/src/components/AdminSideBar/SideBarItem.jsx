@@ -1,9 +1,11 @@
-const SideBarItem = ({ icon, text, setMainContent }) => {
+import { Link } from "react-router-dom"
+
+const SideBarItem = ({ icon, text }) => {
     return (
-        <div onClick={() => { setMainContent(text) }} className="flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors hover:bg-orange-500 hover:text-white">
+        <Link to={`/admin/${text}`} className="flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors hover:bg-orange-500 hover:text-white">
             {icon}
             <span className="w-52 ml-3">{text}</span>
-        </div>
+        </Link>
     )
 }
 export default SideBarItem

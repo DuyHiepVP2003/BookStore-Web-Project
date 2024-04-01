@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { getAllCustomers } from "../utils/CustomerApiFunction"
+import { getAllCustomers, deleteById } from "../utils/CustomerApiFunction"
 import CustomerModal from "./CustomerModal"
 const CustomerManage = () => {
   const [customers, setCustomer] = useState([])
