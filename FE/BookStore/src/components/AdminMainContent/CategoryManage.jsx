@@ -43,7 +43,7 @@ const CategoryManage = () => {
                                     <p className="block antialiased font-sans text-[11px] font-bold uppercase text-gray-400 ">Tên category</p>
                                 </th>
                                 <th className="border-b border-blue-gray-50 py-3 px-5 text-left">
-                                    <p className="block antialiased font-sans text-[11px] font-bold uppercase text-gray-400 ">Category cha</p>
+                                    <p className="block antialiased font-sans text-[11px] font-bold uppercase text-gray-400 ">Ảnh</p>
                                 </th>
                                 <th className="border-b border-blue-gray-50 py-3 px-5 text-left">
                                 </th>
@@ -52,9 +52,11 @@ const CategoryManage = () => {
                         <tbody>
                             {
                                 categories.map(category => (
-                                    <tr onClick={()=>handleSelectCategory(category)} key={category.id} className="hover:bg-gray-100 cursor-pointer">
+                                    <tr onClick={() => handleSelectCategory(category)} key={category.id} className="hover:bg-gray-100 cursor-pointer">
                                         <td className="py-3 px-5 border-b border-blue-gray-50">{category.name}</td>
-                                        <td className="py-3 px-5 border-b border-blue-gray-50">{category.parentCategory}</td>
+                                        <td className="py-3 px-5 border-b border-blue-gray-50">
+                                            <img className="w-10" srcSet={category.parentCategory} alt="anh" />
+                                        </td>
                                         <td onClick={(e) => {
                                             e.stopPropagation()
                                             handleDeleteCategory(category.id)

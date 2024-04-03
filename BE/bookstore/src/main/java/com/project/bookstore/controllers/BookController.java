@@ -24,6 +24,18 @@ public class BookController {
                 new ResponseObject("OK", "Get All Book Success", bookService.findAll())
         );
     }
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<ResponseObject> getBookById(@PathVariable Long id){
+        Book book = bookService.findById(id).orElse(null);
+        if (book == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new ResponseObject("ERROR", "Can Not Found Book Id = "+id, "")
+            );
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject("OK", "Get All Book Success", book)
+        );
+    }
     @PostMapping(path = "/save")
     public ResponseEntity<ResponseObject> saveNewBook(@RequestBody Book book){
         return ResponseEntity.status(HttpStatus.OK).body(

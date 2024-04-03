@@ -1,7 +1,18 @@
 import Product from "../../components/ProductContainer/Product"
 import CheckBoxSearch from "./CheckBoxSearch"
-
+import { getAllBooks } from "../../components/utils/BookApiFunction"
+import { useState, useEffect } from "react"
 const ListProduct = () => {
+    const [books, setBooks] = useState([])
+    useEffect(()=>{
+        getAllBooks()
+            .then((res)=>{
+                setBooks(res.data)
+            })
+            .catch((err)=>{
+                console.error(err)
+            })
+    })
     const listSearch = [{
         name: "price",
         title: "Giá",
@@ -48,15 +59,11 @@ const ListProduct = () => {
 
             </div>
             <div className="w-4/5 grid grid-cols-4 gap-4">
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
+            {
+                books.map(book => (
+                    <Product book={book}/>
+                ))
+            }
             </div>
         </div>
     )

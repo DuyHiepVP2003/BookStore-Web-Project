@@ -1,8 +1,11 @@
 import SideBar from "../../components/AdminSideBar/SideBar"
 import { LuLayoutDashboard } from "react-icons/lu"
 import SideBarItem from "../../components/AdminSideBar/SideBarItem"
-import AuthorManage from "../../components/AdminMainContent/AuthorManage"
-const AuthorManagePage = () => {
+import BookManage from "../../components/AdminMainContent/BookManage"
+import { useState } from "react"
+import BookModal from "../../components/AdminMainContent/BookModal"
+const BookManagePage = () => {
+    const [addNew, setAddNew] = useState(false)
     return (
         <>
             <div className="flex">
@@ -13,9 +16,11 @@ const AuthorManagePage = () => {
                     <SideBarItem icon={<LuLayoutDashboard size={20} />} text="Customer" />
                     <SideBarItem icon={<LuLayoutDashboard size={20} />} text="Publisher" />
                 </SideBar>
-                <AuthorManage className="w-4/5" />
+                {
+                    addNew ? <BookModal setAddNew={setAddNew} /> : <BookManage setAddNew={setAddNew} />
+                }
             </div>
         </>
     )
 }
-export default AuthorManagePage
+export default BookManagePage

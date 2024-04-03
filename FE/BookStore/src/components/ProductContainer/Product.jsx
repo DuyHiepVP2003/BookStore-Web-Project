@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom"
 
-const Product = () => {
+const Product = ({ book }) => {
     return (
-        <Link to='/product_detail' className="px-2 bg-white border rounded-md overflow-hidden border-none hover:shadow-lg">
-            <img className="px-2 py-3 mb-2" alt="anh" srcSet="https://cdn0.fahasa.com/media/catalog/product/8/9/8935325006289.jpg" />
+        <Link to={`/product_detail/${book.id}`} className="px-2 bg-white border rounded-md overflow-hidden border-none hover:shadow-lg">
+            <img className="px-2 py-3 mb-2" alt="anh" srcSet={book.image} />
             <p className=" text-md font-medium">
-                <p>Tô bình yên vẽ hạnh phúc</p>
+                <p>{book.name}</p>
             </p>
-            <p className="mb-5 text-red-600 font-bold">66.880đ</p>
+            <p className="mb-5 text-red-600 font-bold">{book.price}đ</p>
         </Link>
     )
 }
