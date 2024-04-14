@@ -1,7 +1,21 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { BsCart3 } from "react-icons/bs";
 import ProductDescription from "./ProductDescription";
+import { useParams } from "react-router-dom";
+import { getBookById } from "../../components/utils/BookApiFunction";
 const ProductDetail = () => {
+    const [book, setBook] = useState({})
+    let { _id } = useParams()
+    useEffect(() => {
+        getBookById(parseInt(_id))
+            .then((res) => {
+                setBook(res.data)
+                console.log(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }, [])
     const [quantity, setQuantity] = useState(1)
     const handleIncreaseQuantity = () => {
         setQuantity(quantity + 1)
@@ -21,8 +35,8 @@ const ProductDetail = () => {
     return (
         <>
             <div className="max-w-screen-xl mx-auto flex bg-white mt-7 p-4 rounded-xl">
-                <div className="w-1/3">
-                    <img alt="anh" srcSet="https://cdn0.fahasa.com/media/catalog/product/9/7/9786047764655.jpg" />
+                <div className="w-2/5">
+                    <img alt="anh" srcSet={book.image} />
                     <div className="mt-10 flex">
                         <button className="py-2 flex-1 mx-2 rounded-lg cursor-pointer border-2 border-red-600 text-red-600 font-semibold">
                             <BsCart3 className="inline mr-2" />
@@ -32,19 +46,13 @@ const ProductDetail = () => {
                     </div>
                 </div>
                 <div className="flex-1 ml-5">
-                    <h3 className="text-2xl mb-2">Chuyện Kể Cho Tương Lai - Bìa Cứng</h3>
-                    <div className="flex">
-                        <div className="mr-64">
-                            <p>Nhà cung cấp: <span className="font-semibold">KI54226</span></p>
-                            <p>Nhà xuất bản: <span className="font-semibold">Cengage</span></p>
-                        </div>
-                        <div>
-                            <p>Tác giả: <span className="font-semibold">John Hughes</span></p>
-                            <p>Hình thức bìa: <span className="font-semibold">Bìa cứng</span></p>
-                        </div>
+                    <h3 className="text-2xl mb-2">{book.name}</h3>
+                    <div className="mr-64">
+                        <p>Tác giả: <span className="font-semibold">{book.author}</span></p>
+                        <p>Hình thức bìa: <span className="font-semibold">{book.form}</span></p>
+                        <p>Nhà xuất bản: <span className="font-semibold">{book.publisher}</span></p>
                     </div>
-                    <div className="flex items-center text-3xl mt-10 font-bold text-red-700 ">247.000 đ
-                        <span className="text-xl font-normal text-black ml-3 line-through">260.000 đ</span>
+                    <div className="flex items-center text-3xl mt-10 font-bold text-red-700 ">{book.price}đ
                     </div>
                     <div className="flex mt-10 items-center">
                         Số lượng:
@@ -56,7 +64,7 @@ const ProductDetail = () => {
                     </div>
                 </div>
             </div>
-            <ProductDescription />
+            <ProductDescription book={book} />
         </>
     )
 }

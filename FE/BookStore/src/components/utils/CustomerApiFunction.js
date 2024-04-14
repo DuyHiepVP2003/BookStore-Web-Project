@@ -9,6 +9,7 @@ export async function getAllCustomers() {
         return response.data
     } catch (e) {
         console.log(e)
+        return error.response.data
     }
 }
 export async function saveNewCustomer(newCustomer) {
@@ -16,7 +17,7 @@ export async function saveNewCustomer(newCustomer) {
         const response = await api.post('/save', newCustomer)
         return response.data
     } catch (error) {
-        console.log(error)
+        return error.response.data
     }
 }
 
@@ -26,6 +27,7 @@ export async function deleteById(id) {
         return response
     } catch (error) {
         console.log(error)
+        return error.response.data
     }
 }
 
@@ -35,5 +37,6 @@ export async function updateById(id, newCustomer) {
         return response.data
     } catch (error) {
         console.log(error)
+        return error.response.data
     }
 }

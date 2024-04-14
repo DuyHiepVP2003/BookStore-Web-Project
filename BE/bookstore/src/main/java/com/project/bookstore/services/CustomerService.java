@@ -27,4 +27,7 @@ public class CustomerService {
     public boolean existsByEmail(String email) {
         return customerRepository.existsByEmail(email);
     }
+    public Optional<Customer> findByEmail(String email){
+        return customerRepository.findByEmail(email);
+    }
 }

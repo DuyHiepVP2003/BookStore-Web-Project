@@ -5,7 +5,7 @@ const CartPage = () => {
     return (
         <div className="min-h-screen bg-gray-100">
             <Navbar />
-            <div className="max-w-screen-xl mx-auto text-2xl mt-5">GIỎ HÀNG (2 sản phẩm)</div>
+            <div className="max-w-screen-xl mx-auto text-2xl mt-5">GIỎ HÀNG (1 sản phẩm)</div>
             <ListCartItem />
             <Footer />
         </div>

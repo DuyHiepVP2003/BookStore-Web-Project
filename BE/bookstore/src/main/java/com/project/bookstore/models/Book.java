@@ -20,6 +20,7 @@ public class Book {
     private String size;
     private Integer pageNumber;
     private String form;
+    @Column(columnDefinition = "TEXT")
     private String image;
     private String price;
     private String discount;
@@ -27,12 +28,8 @@ public class Book {
     private String description;
     private Integer quantity;
     private Integer sellQuantity;
-    @ManyToOne
-    @JoinColumn(name = "author_id", nullable = true)
-    private Author author;
-    @ManyToOne
-    @JoinColumn(name = "publisher_id")
-    private Publisher publisher;
+    private String author;
+    private String publisher;
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = true)
     private Category category;

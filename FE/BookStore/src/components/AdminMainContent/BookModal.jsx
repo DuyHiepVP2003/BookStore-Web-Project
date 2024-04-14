@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAllAuthor } from "../utils/AuthorApiFunction"
 import { getAllCategories } from "../utils/CategoryApiFunction"
-import { getAllPublishers } from "../utils/PublisherApiFunction"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import { getBookById, saveNewBook, updateById } from "../utils/BookApiFunction"
 
@@ -22,13 +20,11 @@ const BookModal = () => {
         description: '',
         quantity: '',
         sellQuantity: '',
-        author: { id: '' },
-        publisher: { id: '' },
+        author: '',
+        publisher: '',
         category: { id: '' },
     })
-    const [authors, setAuthors] = useState([])
     const [categories, setCategories] = useState([])
-    const [publishers, setPublishers] = useState([])
     let { _id } = useParams()
     const handleInitialFormData = () => {
         if (_id) {
@@ -55,15 +51,15 @@ const BookModal = () => {
                 description: '',
                 quantity: '',
                 sellQuantity: '',
-                author: { id: 0 },
-                publisher: { id: 0 },
+                author: '',
+                publisher: '',
                 category: { id: 0 },
             })
         }
     }
     const handleInputChange = (e) => {
         const { name, value } = e.target
-        if (name === 'author' || name === 'category' || name === 'publisher') {
+        if (name === 'category') {
             setFormData(prevData => ({
                 ...prevData,
                 [name]: { id: parseInt(value) },
@@ -87,21 +83,9 @@ const BookModal = () => {
         navigate('/admin/Book')
     }
     useEffect(() => {
-        getAllAuthor()
-            .then((res) => {
-                setAuthors(res.data)
-            }).catch((err) => {
-                console.error(err)
-            })
         getAllCategories()
             .then((res) => {
                 setCategories(res.data)
-            }).catch((err) => {
-                console.error(err)
-            })
-        getAllPublishers()
-            .then((res) => {
-                setPublishers(res.data)
             }).catch((err) => {
                 console.error(err)
             })
@@ -117,6 +101,14 @@ const BookModal = () => {
                         <div className="mt-5 flex items-center">
                             <label className="min-w-40 mr-4 font-semibold">Tên</label>
                             <input onChange={handleInputChange} required type="text" value={formData.name} name="name" className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
+                        </div>
+                        <div className="mt-5 flex items-center">
+                            <label className="min-w-40 mr-4 font-semibold">Tác giả</label>
+                            <input onChange={handleInputChange} required type="text" value={formData.author} name="author" className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
+                        </div>
+                        <div className="mt-5 flex items-center">
+                            <label className="min-w-40 mr-4 font-semibold">NXB</label>
+                            <input onChange={handleInputChange} required type="text" value={formData.publisher} name="publisher" className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
                         </div>
                         <div className="mt-5 flex items-center">
                             <label className="min-w-40 mr-4 font-semibold">Năm phát hành</label>
@@ -158,7 +150,7 @@ const BookModal = () => {
                         </div>
                         <div className="mt-5 flex items-center">
                             <label className="min-w-40 mr-4 font-semibold">Độ tuổi</label>
-                            <input onChange={handleInputChange} required type="text" value={formData.ageMin} name="ageMin" className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
+                            <input onChange={handleInputChange} type="text" value={formData.ageMin} name="ageMin" className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
                         </div>
                         <div className="mt-5 flex items-center">
                             <label className="min-w-40 mr-4 font-semibold">Mô tả</label>
@@ -172,30 +164,16 @@ const BookModal = () => {
                             <label className="min-w-40 mr-4 font-semibold">Số lượng đã bán</label>
                             <input onChange={handleInputChange} type="number" name="sellQuantity" value={formData.sellQuantity} className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
                         </div>
+                        <div className="mt-5">
+                            <label className="min-w-40 mr-10 font-semibold">Danh mục</label>
+                            <select onChange={handleInputChange} name="category" value={formData.category.id}>
+                                <option value={null}>-------</option>
+                                {categories.map(category => (
+                                    <option key={category.id} value={category.id}>{category.name}</option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div className="mt-5">
-                    <label className="min-w-40 mr-4 font-semibold">Tác giả</label>
-                    <select onChange={handleInputChange} name="author" value={formData.author.id}>
-                        <option value={null}>-------</option>
-                        {authors.map(author => (
-                            <option key={author.id} value={author.id}>{author.name}</option>
-                        ))}
-                    </select>
-                    <label className="min-w-40 mx-4 font-semibold">Nhà xuất bản</label>
-                    <select onChange={handleInputChange} name="publisher" value={formData.publisher.id}>
-                        <option value={null}>-------</option>
-                        {publishers.map(publisher => (
-                            <option key={publisher.id} value={publisher.id}>{publisher.name}</option>
-                        ))}
-                    </select>
-                    <label className="min-w-40 mx-4 font-semibold">Danh mục</label>
-                    <select onChange={handleInputChange} name="category" value={formData.category.id}>
-                        <option value={null}>-------</option>
-                        {categories.map(category => (
-                            <option key={category.id} value={category.id}>{category.name}</option>
-                        ))}
-                    </select>
                 </div>
                 <button type="submit" className="mt-5 cursor-pointer font-semibold bg-blue-600 text-white border rounded-lg w-40 p-2 text-center">Thêm mới</button>
             </form>
