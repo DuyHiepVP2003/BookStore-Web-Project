@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react"
 import { BsCart3 } from "react-icons/bs";
 import ProductDescription from "./ProductDescription";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getBookById } from "../../components/utils/BookApiFunction";
+import useStore from "../../zustand/cart";
 const ProductDetail = () => {
     const [book, setBook] = useState({})
+    const [quantity, setQuantity] = useState(1)
+    const addToCart = useStore((state) => state.addToCart)
+    const navigate = useNavigate()
     let { _id } = useParams()
     useEffect(() => {
         getBookById(parseInt(_id))
             .then((res) => {
                 setBook(res.data)
-                console.log(res.data)
             })
             .catch((err) => {
                 console.log(err)
             })
     }, [])
-    const [quantity, setQuantity] = useState(1)
     const handleIncreaseQuantity = () => {
         setQuantity(quantity + 1)
     }
@@ -40,7 +42,10 @@ const ProductDetail = () => {
                     <div className="mt-10 flex">
                         <button className="py-2 flex-1 mx-2 rounded-lg cursor-pointer border-2 border-red-600 text-red-600 font-semibold">
                             <BsCart3 className="inline mr-2" />
-                            <span>Thêm vào giỏ hàng</span>
+                            <span onClick={()=>{
+                                addToCart({book, quantity})
+                                navigate('/cart')
+                            }}>Thêm vào giỏ hàng</span>
                         </button>
                         <button className="py-2 flex-1 mx-2 rounded-lg cursor-pointer text-white bg-red-600 font-semibold">Mua ngay</button>
                     </div>

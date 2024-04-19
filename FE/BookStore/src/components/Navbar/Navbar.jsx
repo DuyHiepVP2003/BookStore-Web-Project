@@ -3,7 +3,9 @@ import { FaAngleDown, FaSearch, FaRegUser } from "react-icons/fa";
 import { BiBell } from "react-icons/bi";
 import { FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import useAuthStore from "../../zustand/customer";
 const Navbar = () => {
+    const user = useAuthStore((state) => state.user)
     return (
         <div className="bg-white">
             <div className="max-w-screen-xl  mx-auto flex items-center justify-between py-3">
@@ -30,7 +32,7 @@ const Navbar = () => {
                     <FiShoppingCart className="text-2xl text-gray-500" />
                     <div className="text-gray-500">Giỏ hàng</div>
                 </Link>
-                <Link to="/login" className="flex flex-col mx-2 cursor-pointer items-center">
+                <Link to={user ? '/customer' : '/login'} className="flex flex-col mx-2 cursor-pointer items-center">
                     <FaRegUser className="text-2xl text-gray-500" />
                     <div className="text-gray-500">Tài khoản</div>
                 </Link>

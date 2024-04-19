@@ -8,11 +8,15 @@ import CategoryManagePage from "./pages/Admin/CategoryManagePage";
 import CustomerManagePage from "./pages/Admin/CustomerManagePage";
 import BookManagePage from "./pages/Admin/BookManagePage";
 import BookModal from "./components/AdminMainContent/BookModal";
+import CustomerDetail from "./pages/Account/CustomerDetail";
+import ForgotPassword from "./pages/Account/ForgotPassword";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<Home />}></Route >
       <Route path="/login" element={<Login />}></Route >
+      <Route path="/forgotPassword" element={<ForgotPassword />}></Route >
+      <Route path="/customer" element={<CustomerDetail />}></Route >
       <Route path="/product_search" element={<ProductPage />}></Route >
       <Route path="/product_detail/:_id" element={<ProductDetailPage />}></Route >
       <Route path="/admin" element={<BookManagePage />}></Route>
