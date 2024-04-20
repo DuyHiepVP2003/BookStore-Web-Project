@@ -10,12 +10,14 @@ import BookManagePage from "./pages/Admin/BookManagePage";
 import BookModal from "./components/AdminMainContent/BookModal";
 import CustomerDetail from "./pages/Account/CustomerDetail";
 import ForgotPassword from "./pages/Account/ForgotPassword";
+import ResetPassword from "./pages/Account/ResetPassword";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<Home />}></Route >
       <Route path="/login" element={<Login />}></Route >
-      <Route path="/forgotPassword" element={<ForgotPassword />}></Route >
+      <Route path="/forgotPassword/" element={<ForgotPassword />}></Route >
+      <Route path="/resetPassword/:id" element={<ResetPassword />}></Route >
       <Route path="/customer" element={<CustomerDetail />}></Route >
       <Route path="/product_search" element={<ProductPage />}></Route >
       <Route path="/product_detail/:_id" element={<ProductDetailPage />}></Route >

@@ -1,6 +1,7 @@
 package com.project.bookstore.controllers;
 
 import com.project.bookstore.models.Customer;
+import com.project.bookstore.models.LoginRequest;
 import com.project.bookstore.models.ResponseObject;
 import com.project.bookstore.services.CustomerService;
 import org.springframework.beans.BeanUtils;
@@ -19,6 +20,18 @@ public class CustomerController {
     public ResponseEntity<ResponseObject> getAllCustomer(){
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("OK", "Get All Customer Success", customerService.findAll())
+        );
+    }
+    @PostMapping(path = "/emailExist")
+    public ResponseEntity<ResponseObject> checkEmailExist(@RequestParam("email") String email){
+        Customer customer = customerService.findByEmail(email).orElse(null);
+        if (customer!=null){
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new ResponseObject("OK", "Email exist", customer.getId())
+            );
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                new ResponseObject("ERROR", "Email not exist", "")
         );
     }
     @PostMapping(path = "/save")
@@ -67,6 +80,20 @@ public class CustomerController {
         Customer saveCustomer = customerService.save(updateCustomer);
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("OK", "Update Customer ID = " + id +"Success", saveCustomer)
+        );
+    }
+    @PostMapping(path = "/resetPassword/{id}")
+    public ResponseEntity<ResponseObject> updateNewPassword(@PathVariable Long id, @RequestParam("password") String newPassword){
+        Customer updateCustomer = customerService.findById(id).orElse(null);
+        if (updateCustomer == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new ResponseObject("ERROR", "Cannot Found Customer ID = "+id,"")
+            );
+        }
+        updateCustomer.setPassword(newPassword);
+        customerService.save(updateCustomer);
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject("OK", "Update Customer ID = " + id +" Success", updateCustomer)
         );
     }
 }

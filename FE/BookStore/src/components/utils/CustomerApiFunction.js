@@ -3,6 +3,15 @@ import axios from "axios";
 const api = axios.create({
     baseURL: 'http://localhost:8080/api/v1/Customer'
 })
+export async function checkEmailExists(email) {
+    try {
+        const response = await api.post('/emailExist?email='+email)
+        return response.data
+    }catch (error) {
+        console.log(error)
+        return error.response.data
+    }
+}
 export async function getAllCustomers() {
     try {
         const response = await api.get('')
@@ -34,6 +43,15 @@ export async function deleteById(id) {
 export async function updateById(id, newCustomer) {
     try {
         const response = await api.put(`/update/${id}`, newCustomer)
+        return response.data
+    } catch (error) {
+        console.log(error)
+        return error.response.data
+    }
+}
+export async function resetPassword(id, newPassword) {
+    try {
+        const response = await api.post(`/resetPassword/${id}?password=${newPassword}`)
         return response.data
     } catch (error) {
         console.log(error)
