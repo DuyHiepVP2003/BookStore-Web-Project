@@ -20,6 +20,7 @@ const router = createBrowserRouter(
       <Route path="/resetPassword/:id" element={<ResetPassword />}></Route >
       <Route path="/customer" element={<CustomerDetail />}></Route >
       <Route path="/product_search" element={<ProductPage />}></Route >
+      <Route path="/product_search/:filter" element={<ProductPage />}></Route >
       <Route path="/product_detail/:_id" element={<ProductDetailPage />}></Route >
       <Route path="/admin" element={<BookManagePage />}></Route>
       <Route path="/admin/Category" element={<CategoryManagePage />}></Route>

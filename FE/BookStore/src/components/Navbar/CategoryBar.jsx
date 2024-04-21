@@ -23,7 +23,7 @@ const CategoryBar = () => {
             </h3>
             <div className="flex justify-around">
                 {categories.map((item) => (
-                    <Link to="/product_search">
+                    <Link to={`/product_search/${item.name}`}>
                         <CategoryBarItem key={item.id} image={item.parentCategory} title={item.name} />
                     </Link>
                 ))}
