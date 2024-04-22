@@ -2,23 +2,47 @@ import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
 import useAuthStore from "../../zustand/customer"
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { updateById } from "../../components/utils/CustomerApiFunction"
 const CustomerDetail = () => {
     const setUser = useAuthStore((state) => state.setUser)
     const user = useAuthStore((state) => state.user)
     const [customer, setCustomer] = useState(user)
+    const [changePassword, setChangePassword] = useState(false)
+    const [password, setPassword] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+    const [confirmNewPassword, setConfirmNewPassword] = useState('')
+    const [error, setError] = useState('')
     const navigate = useNavigate()
     const handleInputChange = (e) => {
-        let {name, value} = e.target
+        let { name, value } = e.target
         setCustomer({
             ...customer,
             [name]: value
         })
     }
     const handleSubmit = async () => {
-        await updateById(user.id, customer)
-        alert("thanh cong")
+        if (changePassword) {
+            if (password !== user.password) {
+                setError("Mật khẩu không đúng")
+            } else if (confirmNewPassword !== newPassword) {
+                setError("Mật khẩu xác nhận không khớp")
+            } else {
+                setCustomer({
+                    ...customer,
+                    "password": newPassword
+                })
+                setUser({
+                    ...customer,
+                    "password": newPassword
+                })
+                await updateById(user.id, customer)
+                alert("thanh cong")
+            }
+        } else {
+            await updateById(user.id, customer)
+            alert("thanh cong")
+        }
     }
     return (
         <>
@@ -42,6 +66,39 @@ const CustomerDetail = () => {
                         <label className="w-1/3">Địa chỉ</label>
                         <input onChange={handleInputChange} name="address" value={customer.address ? customer.address : ''} className="flex-1 outline-none border border-gray-400 px-2 py-1 rounded-md" type="text" />
                     </div>
+                    <div onClick={() => {
+                        setError('')
+                        setChangePassword(!changePassword)
+                    }} className="mt-5 flex items-center">
+                        <input type="checkbox" className="mr-4 cursor-pointer" /><label className="cursor-pointer">Đổi mật khẩu</label>
+                    </div>
+                    {
+                        changePassword &&
+                        <div>
+                            <div className="flex mt-5">
+                                <label className="w-1/3">Mật khẩu hiện tại</label>
+                                <input onChange={(e) => {
+                                    setError('')
+                                    setPassword(e.target.value)
+                                }} value={password} name="currentPassword" className="flex-1 outline-none border border-gray-400 px-2 py-1 rounded-md" type="password" />
+                            </div>
+                            <div className="flex mt-5">
+                                <label className="w-1/3">Mật khẩu mới</label>
+                                <input onChange={(e) => {
+                                    setError('')
+                                    setNewPassword(e.target.value)
+                                }} value={newPassword} name="newPassword" className="flex-1 outline-none border border-gray-400 px-2 py-1 rounded-md" type="password" />
+                            </div>
+                            <div className="flex mt-5">
+                                <label className="w-1/3">Xác nhận mật khẩu mới</label>
+                                <input onChange={(e) => {
+                                    setError('')
+                                    setConfirmNewPassword(e.target.value)
+                                }} value={confirmNewPassword} name="confirmNewPassword" className="flex-1 outline-none border border-gray-400 px-2 py-1 rounded-md" type="password" />
+                            </div>
+                        </div>
+                    }
+                    {error && <div className="text-red-600">{error}</div>}
                     <div className="flex justify-center">
                         <div onClick={handleSubmit} className="bg-red-600 font-semibold text-white rounded-lg px-7 py-3 mt-5 cursor-pointer">
                             Lưu thay đổi
@@ -51,7 +108,7 @@ const CustomerDetail = () => {
                         <div onClick={() => {
                             setUser(null)
                             navigate('/')
-                            }} className="bg-red-600 font-semibold text-white rounded-lg px-7 py-3 mt-5 cursor-pointer">
+                        }} className="bg-red-600 font-semibold text-white rounded-lg px-7 py-3 mt-5 cursor-pointer">
                             Đăng xuất
                         </div>
                     </div>
