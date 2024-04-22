@@ -1,5 +1,4 @@
 import CategoryBarItem from "./CategoryBarItem"
-import { categoryBarItem } from "../../data/data"
 import { BiCategory } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
