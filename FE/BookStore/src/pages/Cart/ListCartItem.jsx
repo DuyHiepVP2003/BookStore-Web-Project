@@ -20,11 +20,11 @@ const ListCartItem = () => {
             <div className="bg-white p-3 rounded-lg w-1/3 h-min">
                 <div className="border-b pb-2 flex justify-between">
                     <p>Thành tiền</p>
-                    <p>{payment} đ</p>
+                    <p>{payment.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
                 </div>
                 <div className="flex justify-between mt-2 text-xl">
                     <p className="font-semibold">Tổng số tiền</p>
-                    <p className="text-red-700 font-bold">{payment} đ</p>
+                    <p className="text-red-700 font-bold">{payment.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
                 </div>
                 <button className="text-white bg-red-600 font-bold mt-3 py-2 cursor-pointer w-full rounded-lg">THANH TOÁN</button>
             </div>

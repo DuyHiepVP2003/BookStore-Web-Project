@@ -7,7 +7,7 @@ const Product = ({ book }) => {
             <div className=" text-md font-medium">
                 <p>{book.name}</p>
             </div>
-            <p className="mb-5 text-red-600 font-bold">{book.price}đ</p>
+            <p className="mb-5 text-red-600 font-bold">{book.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}đ</p>
         </Link>
     )
 }

@@ -20,7 +20,7 @@ const CartItem = ({ book, itemQuantity }) => {
       <img className="w-32" alt="anh" srcSet={book.image} />
       <div className="flex flex-col justify-between flex-1">
         <h3>{book.name}</h3>
-        <div className="text-red-600 font-semibold">{book.price} đ</div>
+        <div className="text-red-600 font-semibold">{book.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
       </div>
       <div className="flex items-center mr-5">
         <div className=" border-slate-400 border rounded-lg p-1 flex items-center ml-10">

@@ -57,7 +57,7 @@ const ProductDetail = () => {
                         <p>Hình thức bìa: <span className="font-semibold">{book.form}</span></p>
                         <p>Nhà xuất bản: <span className="font-semibold">{book.publisher}</span></p>
                     </div>
-                    <div className="flex items-center text-3xl mt-10 font-bold text-red-700 ">{book.price}đ
+                    <div className="flex items-center text-3xl mt-10 font-bold text-red-700 ">{book.price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
                     </div>
                     <div className="flex mt-10 items-center">
                         Số lượng:
