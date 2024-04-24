@@ -42,12 +42,15 @@ const ProductDetail = () => {
                     <div className="mt-10 flex">
                         <button className="py-2 flex-1 mx-2 rounded-lg cursor-pointer border-2 border-red-600 text-red-600 font-semibold">
                             <BsCart3 className="inline mr-2" />
-                            <span onClick={()=>{
-                                addToCart({book, quantity})
+                            <span onClick={() => {
+                                addToCart({ book, quantity })
                                 navigate('/cart')
                             }}>Thêm vào giỏ hàng</span>
                         </button>
-                        <button className="py-2 flex-1 mx-2 rounded-lg cursor-pointer text-white bg-red-600 font-semibold">Mua ngay</button>
+                        <button onClick={() => {
+                            addToCart({ book, quantity })
+                            navigate('/cart')
+                        }} className="py-2 flex-1 mx-2 rounded-lg cursor-pointer text-white bg-red-600 font-semibold">Mua ngay</button>
                     </div>
                 </div>
                 <div className="flex-1 ml-5">

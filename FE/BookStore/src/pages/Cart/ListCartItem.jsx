@@ -1,11 +1,18 @@
 import CartItem from "./CartItem"
 import useStore from "../../zustand/cart"
 import { useEffect, useState } from "react"
+import useAuthStore from "../../zustand/customer"
+import { useNavigate } from "react-router-dom"
 const ListCartItem = () => {
     const [payment, setPayment] = useState(0)
     const cart = useStore((state) => state.cart)
+    const user = useAuthStore((state) => state.user)
+    const navigate = useNavigate()
+    const handlePayment = () => {
+        user ? navigate('/payment') : navigate('/login')
+    }
     useEffect(() => {
-        const cartValue = cart.reduce((total, cartItem)=>total+parseInt(cartItem.book.price)*cartItem.quantity, 0)
+        const cartValue = cart.reduce((total, cartItem) => total + parseInt(cartItem.book.price) * cartItem.quantity, 0)
         setPayment(cartValue)
     }, [])
     return (
@@ -26,7 +33,7 @@ const ListCartItem = () => {
                     <p className="font-semibold">Tổng số tiền</p>
                     <p className="text-red-700 font-bold">{payment.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
                 </div>
-                <button className="text-white bg-red-600 font-bold mt-3 py-2 cursor-pointer w-full rounded-lg">THANH TOÁN</button>
+                <button onClick={handlePayment} className="text-white bg-red-600 font-bold mt-3 py-2 cursor-pointer w-full rounded-lg">THANH TOÁN</button>
             </div>
         </div>
     )

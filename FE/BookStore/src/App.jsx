@@ -11,6 +11,7 @@ import BookModal from "./components/AdminMainContent/BookModal";
 import CustomerDetail from "./pages/Account/CustomerDetail";
 import ForgotPassword from "./pages/Account/ForgotPassword";
 import ResetPassword from "./pages/Account/ResetPassword";
+import Payment from "./pages/Payment/Payment";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
       <Route path="/forgotPassword/" element={<ForgotPassword />}></Route >
       <Route path="/resetPassword/:id" element={<ResetPassword />}></Route >
       <Route path="/customer" element={<CustomerDetail />}></Route >
+      <Route path="/payment" element={<Payment />}></Route >
       <Route path="/product_search" element={<ProductPage />}></Route >
       <Route path="/product_search/:filter" element={<ProductPage />}></Route >
       <Route path="/product_detail/:_id" element={<ProductDetailPage />}></Route >
