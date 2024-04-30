@@ -5,6 +5,7 @@ import useStore from "../../zustand/cart"
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import useAuthStore from "../../zustand/customer"
+import { getAllOrder, saveNewOrder } from "../../components/utils/OrderApiFunction"
 const Payment = () => {
     const [payment, setPayment] = useState(0)
     const user = useAuthStore((state) => state.user)
@@ -16,6 +17,7 @@ const Payment = () => {
         address: user.address
     })
     const cart = useStore((state) => state.cart)
+    const clearCart = useStore((state) => state.clearCart)
     const navigate = useNavigate()
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -23,6 +25,22 @@ const Payment = () => {
             ...customer,
             [name]: value
         })
+    }
+    const handleConfirmPayment = (e) => {
+        const orderRequest = {
+            ...customer,
+            'total': payment,
+            orderItems: cart
+        }
+        saveNewOrder(orderRequest).then((res) => {
+            alert("thanh toan thanh cong")
+            clearCart()
+            navigate('/')
+        })
+            .catch((err) => {
+                console.log(err)
+                alert("thanh toan that bai")
+            })
     }
     useEffect(() => {
         const cartValue = cart.reduce((total, cartItem) => total + parseInt(cartItem.book.price) * cartItem.quantity, 0)
@@ -67,9 +85,7 @@ const Payment = () => {
                         <p className="font-semibold">Tổng số tiền</p>
                         <p className="text-red-700 font-bold">{payment.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
                     </div>
-                    <button onClick={()=>{
-                        console.log(customer)
-                    }} className="text-white bg-red-600 font-bold mt-3 py-2 cursor-pointer w-full rounded-lg">THANH TOÁN</button>
+                    <button onClick={handleConfirmPayment} className="text-white bg-red-600 font-bold mt-3 py-2 cursor-pointer w-full rounded-lg">THANH TOÁN</button>
                 </div>
             </div>
             <Footer />
