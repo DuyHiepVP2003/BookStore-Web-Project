@@ -27,13 +27,13 @@ const Navbar = () => {
         <>
             <div className="bg-white relative">
                 <div className="max-w-screen-xl  mx-auto flex items-center justify-between py-3">
-                    <Link to="/" className="font-bold text-3xl text-red-700 cursor-pointer">BOOKSTORE.COM</Link>
-                    <div className="flex items-center cursor-pointer mx-5">
+                    <Link to="/" className="font-bold text-3xl text-red-700 cursor-pointer mr-10">BOOKSTORE.COM</Link>
+                    {/* <div className="flex items-center cursor-pointer mx-5">
                         <PiSquaresFour className="text-5xl text-gray-500" />
                         <FaAngleDown className="text-xl text-gray-500" />
-                    </div>
+                    </div> */}
                     <div className="flex-grow">
-                        <div className="flex justify-between items-center py-1 px-6 border border-solid rounded-lg">
+                        <div className="flex justify-between items-center py-1 pl-6 pr-1 border border-solid rounded-lg">
                             <input onChange={handleSearchInputChange} value={searchQuery} type="text" placeholder="Tìm kiếm" className="outline-none" />
                             <div className="flex items-center">
                                 <div className="text-white bg-red-700 cursor-pointer text-2xl rounded-md px-6 py-2 ml-4">
@@ -66,10 +66,10 @@ const Navbar = () => {
                         className="bg-white w-1/2 h-min p-5">
                         {
                             result.map(book => (
-                                <div className="flex cursor-pointer">
+                                <Link to={`/product_detail/${book.id}`} className="flex cursor-pointer">
                                     <img className=" w-28" alt="" srcset={book.image} />
                                     <p className="flex-1">{book.name}</p>
-                                </div>
+                                </Link>
                             ))
                         }
                     </div>

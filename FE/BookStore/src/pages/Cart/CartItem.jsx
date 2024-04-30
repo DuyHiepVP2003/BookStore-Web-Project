@@ -1,6 +1,7 @@
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import useStore from "../../zustand/cart";
+import { Link } from "react-router-dom";
 const CartItem = ({ book, itemQuantity }) => {
   const removeFromCart = useStore((state) => state.removeFromCart)
   const addOneItem = useStore((state) => state.addOneItem)
@@ -17,7 +18,9 @@ const CartItem = ({ book, itemQuantity }) => {
   }
   return (
     <div className="flex p-3 border-b">
-      <img className="w-32" alt="anh" srcSet={book.image} />
+      <Link to={`/product_detail/${book.id}`}>
+        <img className="w-32" alt="anh" srcSet={book.image} />
+      </Link>
       <div className="flex flex-col justify-between flex-1">
         <h3>{book.name}</h3>
         <div className="text-red-600 font-semibold">{book.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
