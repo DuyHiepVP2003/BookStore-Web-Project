@@ -12,10 +12,13 @@ import CustomerDetail from "./pages/Account/CustomerDetail";
 import ForgotPassword from "./pages/Account/ForgotPassword";
 import ResetPassword from "./pages/Account/ResetPassword";
 import Payment from "./pages/Payment/Payment";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import NotFound from "./pages/404/NotFound";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<Home />}></Route >
+      <Route path="/notfoundpage" element={<NotFound />}></Route >
       <Route path="/login" element={<Login />}></Route >
       <Route path="/forgotPassword/" element={<ForgotPassword />}></Route >
       <Route path="/resetPassword/:id" element={<ResetPassword />}></Route >
@@ -24,12 +27,12 @@ const router = createBrowserRouter(
       <Route path="/product_search" element={<ProductPage />}></Route >
       <Route path="/product_search/:filter" element={<ProductPage />}></Route >
       <Route path="/product_detail/:_id" element={<ProductDetailPage />}></Route >
-      <Route path="/admin" element={<BookManagePage />}></Route>
-      <Route path="/admin/Category" element={<CategoryManagePage />}></Route>
-      <Route path="/admin/Customer" element={<CustomerManagePage />}></Route>
-      <Route path="/admin/Book" element={<BookManagePage />}></Route>
-      <Route path="/admin/Book/:_id" element={<BookModal />}></Route>
-      <Route path="/admin/Book/addnew" element={<BookModal />}></Route>
+      <Route path="/admin" element={<ProtectedRoute><BookManagePage /></ProtectedRoute>}></Route>
+      <Route path="/admin/Category" element={<ProtectedRoute><CategoryManagePage /></ProtectedRoute>}></Route>
+      <Route path="/admin/Customer" element={<ProtectedRoute><CustomerManagePage /></ProtectedRoute>}></Route>
+      <Route path="/admin/Book" element={<ProtectedRoute><BookManagePage /></ProtectedRoute>}></Route>
+      <Route path="/admin/Book/:_id" element={<ProtectedRoute><BookModal /></ProtectedRoute>}></Route>
+      <Route path="/admin/Book/addnew" element={<ProtectedRoute><BookModal /></ProtectedRoute>}></Route>
       <Route path="/cart" element={<CartPage />}></Route>
     </Route>
   )
