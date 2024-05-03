@@ -36,12 +36,25 @@ const CustomerDetail = () => {
                     ...customer,
                     "password": newPassword
                 })
-                await updateById(user.id, customer)
-                alert("thanh cong")
+                const res = await updateById(user.id, customer)
+                if (res.status === "ERROR") {
+                    alert("Email đã tồn tại")
+                }
+                else {
+                    alert("Thành công")
+                    setUser(customer)
+                }
             }
         } else {
             await updateById(user.id, customer)
-            alert("thanh cong")
+            const res = await updateById(user.id, customer)
+            if (res.status === "ERROR") {
+                alert("Email đã tồn tại")
+            }
+            else {
+                alert("Thành công")
+                setUser(customer)
+            }
         }
     }
     return (
