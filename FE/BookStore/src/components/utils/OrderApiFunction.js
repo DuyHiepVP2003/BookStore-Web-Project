@@ -20,3 +20,31 @@ export async function getAllOrder() {
         return error.response.data
     }
 }
+export async function deleteOrderById(id){
+    try {
+        const response = await api.delete(`/delete/${id}`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+        return error.response.data
+    }
+}
+export async function getOrderById(id){
+    try {
+        const response = await api.get(`${id}`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+        return error.response.data       
+    }
+}
+
+export async function changeOrderStatus(id){
+    try {
+        const response = await api.put(`/update/${id}`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+        return error.message.data
+    }
+}

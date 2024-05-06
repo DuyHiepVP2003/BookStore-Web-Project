@@ -11,3 +11,19 @@ export async function checkUserValid(loginRequest) {
         return error.response.data
     }
 }
+export async function registerUser(newCustomer) {
+    try {
+        const response = await api.post('/register', newCustomer)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}
+export async function verifyUser(code) {
+    try {
+        const response = await api.get(`/verify?code=${code}`)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}

@@ -17,4 +17,12 @@ public class AuthService {
         if (!customer.getPassword().equals(password)) return false;
         return true;
     }
+    public boolean isEnabledAuth(String email){
+        Customer customer = customerRepository.findByEmail(email).orElse(null);
+        if (customer == null){
+            return false;
+        }
+        if (!customer.isEnabled()) return false;
+        return true;
+    }
 }

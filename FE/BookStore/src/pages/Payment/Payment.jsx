@@ -32,11 +32,12 @@ const Payment = () => {
             'total': payment,
             orderItems: cart
         }
-        saveNewOrder(orderRequest).then((res) => {
-            alert("thanh toan thanh cong")
-            clearCart()
-            navigate('/')
-        })
+        saveNewOrder(orderRequest)
+            .then((res) => {
+                alert("thanh toan thanh cong")
+                clearCart()
+                navigate('/')
+            })
             .catch((err) => {
                 console.log(err)
                 alert("thanh toan that bai")

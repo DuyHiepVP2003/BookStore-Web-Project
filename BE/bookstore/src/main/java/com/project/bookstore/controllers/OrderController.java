@@ -24,12 +24,25 @@ public class OrderController {
                 new ResponseObject("OK", "Get All Order Success", orderService.findAll())
         );
     }
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<ResponseObject> findById(@PathVariable Long id){
+        Order order = orderService.findById(id).orElse(null);
+        if (order == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new ResponseObject("ERROR", "Cannot found Order ID = "+id, "")
+            );
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject("OK", "Get Order ID = "+id+"Success", orderService.findById(id) )
+        );
+    }
     @PostMapping(path = "/save")
     public ResponseEntity<ResponseObject> saveNewOrder(@RequestBody OrderRequest orderRequest){
         Order newOrder = new Order();
         newOrder.setEmail(orderRequest.getEmail());
         newOrder.setAddress(orderRequest.getAddress());
         newOrder.setCheckOut(false);
+        newOrder.setPhoneNumber(orderRequest.getPhoneNumber());
         newOrder.setFirstName(orderRequest.getFirstName());
         newOrder.setLastName(orderRequest.getLastName());
         newOrder.setTotal(orderRequest.getTotal());
@@ -45,6 +58,20 @@ public class OrderController {
         orderService.save(newOrder);
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("OK", "Save new success", newOrder)
+        );
+    }
+    @PutMapping(path = "/update/{id}")
+    public ResponseEntity<ResponseObject> changeOrderStatus(@PathVariable Long id){
+        Order order = orderService.findById(id).orElse(null);
+        if (order == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new ResponseObject("ERROR", "Cannot found Order ID = "+id, "")
+            );
+        }
+        order.setCheckOut(!order.isCheckOut());
+        orderService.save(order);
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject("OK", "Change status success", "")
         );
     }
     @DeleteMapping(path = "/delete/{id}")

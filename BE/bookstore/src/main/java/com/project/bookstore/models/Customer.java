@@ -1,9 +1,6 @@
 package com.project.bookstore.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,4 +19,7 @@ public class Customer {
     private String address;
     private String phoneNumber;
     private String role;
+    @Column(name = "verification_code")
+    private String verificationCode;
+    private boolean enabled;
 }

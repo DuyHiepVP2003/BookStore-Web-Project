@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { saveNewCustomer } from "../utils/CustomerApiFunction"
+import { registerUser } from "../utils/AuthApiFunction"
+import { useNavigate } from "react-router-dom"
 
 const RegisterForm = () => {
     const [formData, setFormData] = useState({
@@ -9,6 +11,14 @@ const RegisterForm = () => {
     })
     const [confirmPassword, setConfirmPassword] = useState('')
     const [error, setError] = useState('')
+    const navigate = useNavigate()
+    const checkInputValid = () => {
+        if (formData.email === '' || formData.password === '') {
+            setError('Vui lòng nhập toàn bộ thông tin')
+            return false
+        }
+        return true
+    }
     const handleInputChange = (e) => {
         let { name, value } = e.target
         setFormData({
@@ -18,16 +28,20 @@ const RegisterForm = () => {
         setError('')
     }
     const handleRegister = async () => {
+        if (!checkInputValid()) {
+            alert("Vui lòng nhập thông tin")
+            return
+        }
         if (confirmPassword !== formData.password) {
             setError('Passwords do not match')
         }
         else {
-            const responseMessage = await saveNewCustomer(formData)
+            const responseMessage = await registerUser(formData)
             if (responseMessage.status === 'ERROR'){
                 setError('Email exist')
             }
             else {
-                alert('Success')
+                navigate('/registerSuccess')
             }
         }
     }
