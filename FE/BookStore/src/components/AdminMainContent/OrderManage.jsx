@@ -57,7 +57,7 @@ const OrderManage = () => {
                                         <td className="py-3 px-5 border-b border-blue-gray-50">{order.email}</td>
                                         <td className="py-3 px-5 border-b border-blue-gray-50">{order.phoneNumber}</td>
                                         <td className="py-3 px-5 border-b border-blue-gray-50">{order.address}</td>
-                                        <td className="py-3 px-5 border-b border-blue-gray-50">{order.total}</td>
+                                        <td className="py-3 px-5 border-b border-blue-gray-50">{order.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</td>
                                         <td className={`py-3 px-5 border-b font-bold border-blue-gray-50 ${order.checkOut ? "text-green-500" : "text-red-600"}`}>{order.checkOut ? "Đã xác nhận" : "Chưa xác nhận"}</td>
                                         <td onClick={(e)=>{
                                             e.stopPropagation();

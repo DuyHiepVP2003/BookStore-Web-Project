@@ -55,7 +55,7 @@ const OrderModal = () => {
             </div>
             <div className="mt-5 flex items-center">
               <label className="min-w-40 mr-4 font-semibold">Tổng tiền</label>
-              <input readOnly type="text" name="total" value={order.total} className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
+              <input readOnly type="text" name="total" value={`${order.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ`} className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
             </div>
             <div className="mt-5 flex items-center">
               <label className="min-w-40 mr-4 font-semibold">Trạng thái</label>
@@ -83,7 +83,7 @@ const OrderModal = () => {
                 <tr className="hover:bg-gray-100 cursor-pointer">
                   <td className="py-3 px-5 border-b border-blue-gray-50">{orderItem.book.name}</td>
                   <td className="py-3 px-5 border-b border-blue-gray-50">{orderItem.quantity}</td>
-                  <td className="py-3 px-5 border-b border-blue-gray-50">{orderItem.book.price}</td>
+                  <td className="py-3 px-5 border-b border-blue-gray-50">{orderItem.book.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</td>
                 </tr>
               ))
             }
