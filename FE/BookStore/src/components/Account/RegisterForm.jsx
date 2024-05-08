@@ -8,6 +8,7 @@ const RegisterForm = () => {
         password: '',
         role: 'USER'
     })
+    const [loading, setLoading] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState('')
     const [error, setError] = useState('')
     const navigate = useNavigate()
@@ -35,11 +36,14 @@ const RegisterForm = () => {
             setError('Passwords do not match')
         }
         else {
+            setLoading(true)
             const responseMessage = await registerUser(formData)
-            if (responseMessage.status === 'ERROR'){
+            if (responseMessage.status === 'ERROR') {
                 setError('Email exist')
+                setLoading(false)
             }
             else {
+                setLoading(false)
                 alert("Đăng ký thành công hãy xác nhận email của bạn để đăng nhập")
             }
         }
@@ -56,7 +60,11 @@ const RegisterForm = () => {
                 setConfirmPassword(e.target.value)
             }} required className="my-2 outline-none border border-gray-200 rounded-md px-4 py-2 focus:border-blue-500 focus:shadow-md" type="password" name="confirmPassword" id="confirmPassword" placeholder="Xác nhận mật khẩu" />
             {error === 'Passwords do not match' && <div className="text-red-600">Mật khẩu không khớp</div>}
-            <button onClick={handleRegister} className="font-bold text-white bg-red-700 px-4 py-2 rounded-md w-1/2 text-center mx-auto mt-5 cursor-pointer">Đăng ký</button>
+            {loading && <div className="text-red-600">Yêu cầu của bạn đang được xử lý</div>}
+            {loading ?
+                <button className="font-bold text-white bg-gray-700 px-4 py-2 rounded-md w-1/2 text-center mx-auto mt-5 cursor-not-allowed">Đăng ký</button>
+                : <button onClick={handleRegister} className="font-bold text-white bg-red-700 px-4 py-2 rounded-md w-1/2 text-center mx-auto mt-5 cursor-pointer">Đăng ký</button>
+            }
         </div>
     )
 }
