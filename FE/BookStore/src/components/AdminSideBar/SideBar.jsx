@@ -7,19 +7,6 @@ const SideBar = ({ children }) => {
                     <div className="font-bold text-xl text-orange-500">Admin Manage</div>
                 </div>
                 <div className="flex-1 px-3">{children}</div>
-                <div className="border-t flex p-3">
-                    <img
-                        src="https://ui-avatars.com/api/?name=John+Doe"
-                        alt="avatar"
-                        className="w-10 h-10 rounded-md"
-                    />
-                    <div className="flex justify-between items-center w-52 ml-3">
-                        <div>
-                            <h4 className=" font-semibold">John Doe</h4>
-                            <span className="text-xs text-gray-600">johndoe@gmail.com</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     )
