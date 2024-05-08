@@ -14,7 +14,7 @@ const ListCartItem = () => {
     useEffect(() => {
         const cartValue = cart.reduce((total, cartItem) => total + parseInt(cartItem.book.price) * cartItem.quantity, 0)
         setPayment(cartValue)
-    }, [])
+    }, [cart])
     return (
         <div className="max-w-screen-xl mx-auto mt-5 flex">
             <div className="mr-5 bg-white p-3 rounded-lg w-2/3">
