@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { saveNewCustomer } from "../utils/CustomerApiFunction"
 import { registerUser } from "../utils/AuthApiFunction"
 import { useNavigate } from "react-router-dom"
 
@@ -41,7 +40,7 @@ const RegisterForm = () => {
                 setError('Email exist')
             }
             else {
-                navigate('/registerSuccess')
+                alert("Đăng ký thành công hãy xác nhận email của bạn để đăng nhập")
             }
         }
     }
