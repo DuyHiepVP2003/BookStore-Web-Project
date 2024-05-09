@@ -1,19 +1,33 @@
 import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
 import { useNavigate, useParams } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { resetPassword } from "../../components/utils/CustomerApiFunction"
+import { getUserByCode } from "../../components/utils/AuthApiFunction"
 const ResetPassword = () => {
     const { id } = useParams()
+    const [userId, setUserId] = useState(0)
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [error, setError] = useState('')
     const navigate = useNavigate()
+    useEffect(() => {
+        if (!id) {
+            const param = new URLSearchParams(location.search)
+            const code = param.get('code')
+            getUserByCode(code)
+                .then((res) => {
+                    setUserId(res.data)
+                })
+                .catch((err) => { })
+        }
+        else setUserId(id)
+    }, [])
     const handleSubmit = async () => {
         if (confirmPassword !== password) {
             setError("Mật khẩu không khớp")
         } else {
-            const res = await resetPassword(id, password)
+            const res = await resetPassword(userId, password)
             if (res.status === 'OK') {
                 navigate('/login')
             } else {

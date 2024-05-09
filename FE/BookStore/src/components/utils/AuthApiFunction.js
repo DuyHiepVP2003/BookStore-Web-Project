@@ -27,3 +27,19 @@ export async function verifyUser(code) {
         return error.response.data
     }
 }
+export async function resetPassword(email) {
+    try {
+        const response = await api.post(`/resetPassword/${email}`)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}
+export async function getUserByCode(code){
+    try {
+        const response = await api.get(`/${code}`)
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+}

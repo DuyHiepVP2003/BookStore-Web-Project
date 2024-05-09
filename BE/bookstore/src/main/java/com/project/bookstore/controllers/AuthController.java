@@ -34,9 +34,25 @@ public class AuthController {
         String randomString = RandomStringUtils.random(64, true, true);
         customer.setVerificationCode(randomString);
         customerService.save(customer);
-        customerService.sendVerificationEmail(customer);
+        customerService.sendVerificationEmail(customer, "verify");
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject("OK", "Regitration success", customer)
+        );
+    }
+    @PostMapping(path = "/resetPassword/{email}")
+    public ResponseEntity<ResponseObject> processResetPassword(@PathVariable String email) throws MessagingException, UnsupportedEncodingException {
+        Customer customer = customerService.findByEmail(email).orElse(null);
+        if (customer == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    new ResponseObject("ERROR", "Email not Exist", "")
+            );
+        }
+        String randomString = RandomStringUtils.random(64, true, true);
+        customer.setVerificationCode(randomString);
+        customerService.save(customer);
+        customerService.sendVerificationEmail(customer, "resetPassword");
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject("OK", "Send email reset password success", customer)
         );
     }
     @GetMapping(path = "/verify")
@@ -47,6 +63,18 @@ public class AuthController {
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                 new ResponseObject("ERROR", "Cannot verify account", "")
+        );
+    }
+    @GetMapping(path = "/{code}")
+    public ResponseEntity<ResponseObject> getUserByCode(@PathVariable String code){
+        Customer customer = customerService.findByVerificationCode(code).orElse(null);
+        if (customer == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    new ResponseObject("ERROR", "Code wrong or expiration", "")
+            );
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new ResponseObject("OK", "Get user success", customer.getId())
         );
     }
     @PostMapping

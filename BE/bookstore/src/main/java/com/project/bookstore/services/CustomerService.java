@@ -37,6 +37,9 @@ public class CustomerService {
     public Optional<Customer> findByEmail(String email){
         return customerRepository.findByEmail(email);
     }
+    public Optional<Customer> findByVerificationCode(String code){
+        return customerRepository.findByVerificationCode(code);
+    }
     public boolean verify(String verificationCode){
         Customer customer = customerRepository.findByVerificationCode(verificationCode).orElse(null);
         if (customer == null || customer.isEnabled()) return false;
@@ -44,13 +47,13 @@ public class CustomerService {
         customerRepository.save(customer);
         return true;
     }
-    public void sendVerificationEmail(Customer user) throws MessagingException, UnsupportedEncodingException {
+    public void sendVerificationEmail(Customer user, String type) throws MessagingException, UnsupportedEncodingException {
         String subject = "Please verify your registation";
-        String senderName = "Group Name";
+        String senderName = "Book store";
         String siteURL = "http://localhost:5173";
         String mailContent = "<p>Dear " + user.getName() +",</p>";
         mailContent+="<p>Please click the link below to verify to your registation:</p>";
-        String verifyURL = siteURL + "/verify?code=" + user.getVerificationCode();
+        String verifyURL = siteURL + "/"+type+"?code=" + user.getVerificationCode();
         mailContent+="<h3><a href=\""+ verifyURL + "\">VERIFY</a></h3>";
         mailContent+="<p>Thank you<br>The Group Name</p>";
 
