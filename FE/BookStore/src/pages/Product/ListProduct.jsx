@@ -31,25 +31,13 @@ const ListProduct = () => {
         name: "price",
         title: "Giá",
         items: [
-            "0đ - 150,000đ",
-            "150,000đ - 300,000đ",
-            "300,000đ - 500,000đ",
-            "500,000đ - 700,000đ",
-            "700,000đ trở lên"
+            { label: "0đ - 150,000đ", range: [0, 150000] },
+            { label: "150,000đ - 300,000đ", range: [150000, 300000] },
+            { label: "300,000đ - 500,000đ", range: [300000, 500000] },
+            { label: "500,000đ - 700,000đ", range: [500000, 700000] },
+            { label: "700,000đ trở lên", range: [700000, Infinity] }
         ]
-    }, {
-        name: "genres",
-        title: "Genres",
-        items: [
-            "Comedy",
-            "Shonen",
-            "Adventure",
-            "Drama",
-            "Action",
-            "Fantasy",
-            "Sci Fi"
-        ]
-    }
+    },
     ]
     const handleSearchByCategory = (e) => {
         navigate(`/product_search/${e.target.textContent}`)
@@ -64,14 +52,14 @@ const ListProduct = () => {
                             <li
                                 onClick={handleSearchByCategory}
                                 key={category.id}
-                                className={`${filter===category.name?'text-[#F7941E]': 'text-gray-700' }  hover:text-[#F7941E] cursor-pointer`}>{category.name}
+                                className={`${filter === category.name ? 'text-[#F7941E]' : 'text-gray-700'}  hover:text-[#F7941E] cursor-pointer`}>{category.name}
                             </li>
                         ))}
                     </ul>
                 </div>
                 {
                     listSearch.map((item, index) => (
-                        <CheckBoxSearch title={item.title} items={item.items} name={item.name} />
+                        <CheckBoxSearch listProduct={books} setListProduct={setListProduct} title={item.title} items={item.items} filter={filter} />
                     ))
                 }
 

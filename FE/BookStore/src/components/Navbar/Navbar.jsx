@@ -31,11 +31,11 @@ const Navbar = () => {
                     <div className="flex-grow px-20">
                         <div className="flex justify-between items-center py-1 pl-6 pr-1 border border-solid rounded-lg">
                             <input onChange={handleSearchInputChange} value={searchQuery} type="text" placeholder="Tìm kiếm" className="outline-none" />
-                            <div className="flex items-center">
+                            <Link to='/product_search' className="flex items-center">
                                 <div className="text-white bg-red-700 cursor-pointer text-2xl rounded-md px-6 py-2 ml-4">
                                     <FaSearch />
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                     <Link to="/cart" className="flex flex-col mx-2 cursor-pointer items-center">
