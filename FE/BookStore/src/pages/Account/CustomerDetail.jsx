@@ -30,11 +30,12 @@ const CustomerDetail = () => {
             } else {
                 setCustomer({
                     ...customer,
-                    "password": newPassword
+                    password: newPassword
                 })
+                console.log(customer)
                 setUser({
                     ...customer,
-                    "password": newPassword
+                    password: newPassword
                 })
                 const res = await updateById(user.id, customer)
                 if (res.status === "ERROR") {
@@ -65,19 +66,19 @@ const CustomerDetail = () => {
                     <h1 className="text-2xl font-bold">Thông tin tài khoản</h1>
                     <div className="flex mt-5">
                         <label className="w-1/3">Tên</label>
-                        <input onChange={handleInputChange} name="name" value={customer.name ? customer.name : ''} className="flex-1 outline-none border border-gray-400 px-2 py-1 rounded-md" type="text" />
+                        <input onChange={handleInputChange} name="name" value={customer.name ? customer.name : ''} className="flex-1 font-semibold outline-none border border-gray-400 px-2 py-1 rounded-md focus:border-blue-500 focus:shadow-md" type="text" />
                     </div>
                     <div className="flex mt-5">
                         <label className="w-1/3">Email</label>
-                        <input required onChange={handleInputChange} name="email" value={customer.email ? customer.email : ''} className="flex-1 outline-none border border-gray-400 px-2 py-1 rounded-md" type="email" />
+                        <input onChange={handleInputChange} name="email" value={customer.email ? customer.email : ''} className="flex-1 font-semibold outline-none border border-gray-400 px-2 py-1 rounded-md focus:border-blue-500 focus:shadow-md" type="email" />
                     </div>
                     <div className="flex mt-5">
                         <label className="w-1/3">Số điện thoại</label>
-                        <input onChange={handleInputChange} name="phoneNumber" value={customer.phoneNumber ? customer.phoneNumber : ''} className="flex-1 outline-none border border-gray-400 px-2 py-1 rounded-md" type="number" />
+                        <input onChange={handleInputChange} name="phoneNumber" value={customer.phoneNumber ? customer.phoneNumber : ''} className="flex-1 font-semibold outline-none border border-gray-400 px-2 py-1 rounded-md focus:border-blue-500 focus:shadow-md" type="number" />
                     </div>
                     <div className="flex mt-5">
                         <label className="w-1/3">Địa chỉ</label>
-                        <input onChange={handleInputChange} name="address" value={customer.address ? customer.address : ''} className="flex-1 outline-none border border-gray-400 px-2 py-1 rounded-md" type="text" />
+                        <input onChange={handleInputChange} name="address" value={customer.address ? customer.address : ''} className="flex-1 font-semibold outline-none border border-gray-400 px-2 py-1 rounded-md focus:border-blue-500 focus:shadow-md" type="text" />
                     </div>
                     <div onClick={() => {
                         setError('')
@@ -93,21 +94,21 @@ const CustomerDetail = () => {
                                 <input onChange={(e) => {
                                     setError('')
                                     setPassword(e.target.value)
-                                }} value={password} name="currentPassword" className="flex-1 outline-none border border-gray-400 px-2 py-1 rounded-md" type="password" />
+                                }} value={password} name="currentPassword" className="flex-1 outline-none border border-gray-400 px-2 py-1 rounded-md focus:border-blue-500 focus:shadow-md" type="password" />
                             </div>
                             <div className="flex mt-5">
                                 <label className="w-1/3">Mật khẩu mới</label>
                                 <input onChange={(e) => {
                                     setError('')
                                     setNewPassword(e.target.value)
-                                }} value={newPassword} name="newPassword" className="flex-1 outline-none border border-gray-400 px-2 py-1 rounded-md" type="password" />
+                                }} value={newPassword} name="newPassword" className="flex-1 outline-none border border-gray-400 px-2 py-1 rounded-md focus:border-blue-500 focus:shadow-md" type="password" />
                             </div>
                             <div className="flex mt-5">
                                 <label className="w-1/3">Xác nhận mật khẩu mới</label>
                                 <input onChange={(e) => {
                                     setError('')
                                     setConfirmNewPassword(e.target.value)
-                                }} value={confirmNewPassword} name="confirmNewPassword" className="flex-1 outline-none border border-gray-400 px-2 py-1 rounded-md" type="password" />
+                                }} value={confirmNewPassword} name="confirmNewPassword" className="flex-1 outline-none border border-gray-400 px-2 py-1 rounded-md focus:border-blue-500 focus:shadow-md" type="password" />
                             </div>
                         </div>
                     }
