@@ -11,12 +11,12 @@ const ProductContainer = () => {
             .catch((err)=>{
                 console.error(err)
             })
-    })
+    }, [])
     return (
         <div className="max-w-screen-xl mx-auto grid grid-cols-5 gap-4">
             {
-                books.map(book => (
-                    <Product book={book}/>
+                books?.map((book, index) => (
+                    <Product key={index} book={book}/>
                 ))
             }
         </div>

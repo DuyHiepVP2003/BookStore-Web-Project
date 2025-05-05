@@ -21,7 +21,7 @@ const BookManage = () => {
             <div className="flex flex-col ">
                 <div className="bg-black w-1/2 h-min py-4 mt-4 mx-auto rounded-lg text-xl font-semibold text-white text-center">Danh sách sách</div>
                 <Link to='/admin/Book/addnew' className="font-semibold w-1/4 my-5 ml-10 p-4 bg-blue-500 text-white rounded-lg cursor-pointer">Thêm mới sách</Link>
-                <div className="grid grid-cols-5 gap-4 mx-10">
+                <div className="grid grid-cols-6 gap-4 mx-10">
                     {
                         books.map(book => (
                             <div key={book.id} className="px-2 bg-white border rounded-md overflow-hidden border-none hover:shadow-lg cursor-pointer">

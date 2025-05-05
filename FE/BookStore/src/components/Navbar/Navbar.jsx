@@ -16,7 +16,9 @@ const Navbar = () => {
     const handleSearchInputChange = (e) => {
         const query = e.target.value
         setSearchQuery(query)
-        const queryResult = books.filter(book => book.name.toLowerCase().includes(query.toLowerCase())).slice(0, 5)
+        const bookQueryResult = books.filter(book => book.name.toLowerCase().includes(query.toLowerCase()))
+        const authorQueryResult = books.filter(book => book.author.toLowerCase().includes(query.toLowerCase()))
+        const queryResult = [...bookQueryResult, ...authorQueryResult].slice(0,5)
         setResult(queryResult)
         setShowSearchEngine(true)
     }

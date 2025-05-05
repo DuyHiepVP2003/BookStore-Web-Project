@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { registerUser } from "../utils/AuthApiFunction"
-import { useNavigate } from "react-router-dom"
 
 const RegisterForm = () => {
     const [formData, setFormData] = useState({
@@ -9,9 +8,9 @@ const RegisterForm = () => {
         role: 'USER'
     })
     const [loading, setLoading] = useState(false)
+    const [success, setSuccess] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState('')
     const [error, setError] = useState('')
-    const navigate = useNavigate()
     const checkInputValid = () => {
         if (formData.email === '' || formData.password === '') {
             setError('Vui lòng nhập toàn bộ thông tin')
@@ -44,12 +43,17 @@ const RegisterForm = () => {
             }
             else {
                 setLoading(false)
-                alert("Đăng ký thành công hãy xác nhận email của bạn để đăng nhập")
+                setSuccess(true)
             }
         }
     }
     return (
         <div className="flex flex-col w-1/3">
+            {success && 
+                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                    <span class="font-medium">Đăng ký thành công!</span> Hãy xác nhận email của bạn để đăng nhập
+                </div>
+            }
             <label className="mb-2 mt-4" htmlFor="email">Email</label>
             <input onChange={handleInputChange} required className="my-2 outline-none border border-gray-200 rounded-md px-4 py-2 focus:border-blue-500 focus:shadow-md" type="email" name="email" id="email" placeholder="Nhập email của bạn" />
             {error === 'Email exist' && <div className="text-red-600">Email đã tồn tại</div>}

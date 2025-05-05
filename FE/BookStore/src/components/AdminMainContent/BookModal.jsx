@@ -126,6 +126,8 @@ const BookModal = () => {
                             <label className="min-w-40 mr-4 font-semibold">Kích thước</label>
                             <input onChange={handleInputChange} type="text" value={formData.size} name="size" className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
                         </div>
+                    </div>
+                    <div className="w-1/2">
                         <div className="mt-5 flex items-center">
                             <label className="min-w-40 mr-4 font-semibold">Số trang</label>
                             <input onChange={handleInputChange} type="text" value={formData.pageNumber} name="pageNumber" className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
@@ -134,8 +136,6 @@ const BookModal = () => {
                             <label className="min-w-40 mr-4 font-semibold">Kiểu dáng</label>
                             <input onChange={handleInputChange} type="text" value={formData.form} name="form" className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
                         </div>
-                    </div>
-                    <div className="w-1/2">
                         <div className="mt-5 flex items-center">
                             <label className="min-w-40 mr-4 font-semibold">Link ảnh</label>
                             <input onChange={handleInputChange} required type="text" value={formData.image} name="image" className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
@@ -145,24 +145,12 @@ const BookModal = () => {
                             <input onChange={handleInputChange} required type="text" value={formData.price} name="price" className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
                         </div>
                         <div className="mt-5 flex items-center">
-                            <label className="min-w-40 mr-4 font-semibold">Giảm giá</label>
-                            <input onChange={handleInputChange} type="text" name="discount" value={formData.discount} className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
-                        </div>
-                        <div className="mt-5 flex items-center">
                             <label className="min-w-40 mr-4 font-semibold">Độ tuổi</label>
                             <input onChange={handleInputChange} type="text" value={formData.ageMin} name="ageMin" className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
                         </div>
                         <div className="mt-5 flex items-center">
-                            <label className="min-w-40 mr-4 font-semibold">Mô tả</label>
-                            <input onChange={handleInputChange} type="text" name="description" value={formData.description} className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
-                        </div>
-                        <div className="mt-5 flex items-center">
                             <label className="min-w-40 mr-4 font-semibold">Số lượng</label>
                             <input onChange={handleInputChange} type="number" name="quantity" value={formData.quantity} className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
-                        </div>
-                        <div className="mt-5 flex items-center">
-                            <label className="min-w-40 mr-4 font-semibold">Số lượng đã bán</label>
-                            <input onChange={handleInputChange} type="number" name="sellQuantity" value={formData.sellQuantity} className="p-2 w-1/2 outline-none border border-gray-200 rounded-md" />
                         </div>
                         <div className="mt-5">
                             <label className="min-w-40 mr-10 font-semibold">Danh mục</label>

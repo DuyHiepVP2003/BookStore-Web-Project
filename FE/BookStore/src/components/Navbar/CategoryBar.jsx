@@ -13,7 +13,7 @@ const CategoryBar = () => {
             .catch((err) => {
                 console.log(err)
             })
-    })
+    }, [])
     return (
         <div className="max-w-screen-xl border-none py-3 my-5 mx-auto border rounded-lg bg-white">
             <h3 className="font-semibold text-2xl  ml-4 border-b pb-2 mb-2 flex items-center">
@@ -21,8 +21,8 @@ const CategoryBar = () => {
                 Danh mục sản phẩm
             </h3>
             <div className="flex justify-around">
-                {categories.map((item) => (
-                    <Link to={`/product_search/${item.name}`}>
+                {categories?.map((item, index) => (
+                    <Link key={index} to={`/product_search/${item.name}`}>
                         <CategoryBarItem key={item.id} image={item.parentCategory} title={item.name} />
                     </Link>
                 ))}

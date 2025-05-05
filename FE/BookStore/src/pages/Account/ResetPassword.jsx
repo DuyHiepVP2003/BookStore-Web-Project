@@ -10,6 +10,7 @@ const ResetPassword = () => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [error, setError] = useState('')
+    const [success, setSuccess] = useState(false)
     const navigate = useNavigate()
     useEffect(() => {
         if (!id) {
@@ -29,7 +30,7 @@ const ResetPassword = () => {
         } else {
             const res = await resetPassword(userId, password)
             if (res.status === 'OK') {
-                navigate('/login')
+                setSuccess(true)
             } else {
                 alert('error')
             }
@@ -40,9 +41,14 @@ const ResetPassword = () => {
             <div className="min-h-screen bg-gray-100">
                 <Navbar />
                 <div className="bg-white max-w-screen-xl mx-auto mt-2 mb-10 py-10 flex flex-col items-center">
-                    <div className="font-bold text-xl">Nhập mật khẩu mới của bạn</div>
+                    <div className="font-bold text-xl mb-4">Nhập mật khẩu mới của bạn</div>
+                    {success &&
+                        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                            <span class="font-medium">Đổi mật khẩu thành công!</span>
+                        </div>
+                    }
                     <div className="my-4">
-                        <label className="mr-4">Mật khẩu</label>
+                        <label className="mr-14">Mật khẩu mới</label>
                         <input onChange={(e) => {
                             setError('')
                             setPassword(e.target.value)

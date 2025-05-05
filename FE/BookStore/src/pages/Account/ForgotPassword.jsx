@@ -8,6 +8,7 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState('')
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
   const navigate = useNavigate()
   const handleSubmit = async () => {
     const res = await checkEmailExists(email)
@@ -15,8 +16,8 @@ const ForgotPassword = () => {
       setLoading(true)
       resetPassword(email)
         .then((res) => {
-          alert('Verified email')
-          navigate(`/`)
+          setSuccess(true)
+          setLoading(false)
         })
         .catch((err) => {
           console.error(err)
@@ -31,8 +32,13 @@ const ForgotPassword = () => {
       <div className="min-h-screen bg-gray-100">
         <Navbar />
         <div className="bg-white max-w-screen-xl mx-auto mt-2 mb-10 py-10 flex flex-col items-center">
-          <div className="font-bold text-xl">Nhập email của bạn</div>
-          <div className="my-4">
+          <div className="font-bold text-xl mb-4">Nhập email của bạn</div>
+          {success &&
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+              <span class="font-medium">Yêu cầu đã được gửi!</span> Hãy xác nhận email của bạn để lấy lại mật khẩu
+            </div>
+          }
+          <div className="mb-4">
             <label className=" mr-4">Email của bạn</label>
             <input onChange={(e) => {
               setError('')
