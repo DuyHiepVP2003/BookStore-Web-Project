@@ -51,11 +51,11 @@ public class CustomerService {
         String subject = "Please verify your registation";
         String senderName = "Book store";
         String siteURL = "http://localhost:5173";
-        String mailContent = "<p>Dear " + user.getName() +",</p>";
+        String mailContent = "<p>Dear customer,</p>";
         mailContent+="<p>Please click the link below to verify to your registation:</p>";
         String verifyURL = siteURL + "/"+type+"?code=" + user.getVerificationCode();
         mailContent+="<h3><a href=\""+ verifyURL + "\">VERIFY</a></h3>";
-        mailContent+="<p>Thank you<br>The Group Name</p>";
+        mailContent+="<p>Thank you<br>Book store</p>";
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
